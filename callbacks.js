@@ -18,11 +18,51 @@ function onError(id) {
     console.log(`Sucedio un error al obtener el personaje ${id}`);
 }
 
-getCharacter(1)
-    .then(function(character) {
-        console.log(`El personaje es ${character.name}`)
-    })
+var ids = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+// var promesas = ids.map(function (id){
+//     return getCharacter(id)
+// })
+//Se puede poner como arrow function
+
+var promesas = ids.map(id => getCharacter(id))
+Promise
+    .all(promesas)
+    .then(characters => console.log(characters))
     .catch(onError)
+
+
+
+
+// getCharacter(1)
+//     .then(function(character1) {
+//         console.log(`El personaje 1 es ${character1.name}`)
+//         return getCharacter(2)
+//     })
+//     .then(character2 => {
+//         console.log(`El personaje 2 es ${character2.name}`)
+//         return getCharacter(3)
+//     })
+//     .then(character3 => {
+//         console.log(`El personaje 3 es ${character3.name}`)
+//         return getCharacter(4)
+//     })
+//     .then(character4 => {
+//         console.log(`El personaje 4 es ${character4.name}`)
+//         return getCharacter(5)
+//     })
+//     .then(character5 => {
+//         console.log(`El personaje 5 es ${character5.name}`)
+//         return getCharacter(6)
+//     })
+//     .then(character6 => {
+//         console.log(`El personaje 6 es ${character6.name}`)
+//         return getCharacter(7)
+//     })
+//     .then(character7 => {
+//         console.log(`El personaje 7 es ${character7.name}`)
+//     })
+//     .catch(onError)
 
 // Al usar un metodo asincrono dependera de la respuesta del servidor
 // aunque se coloque un orden no sabremos cual respondera primero.
