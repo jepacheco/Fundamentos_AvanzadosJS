@@ -18,22 +18,22 @@ function onError(id) {
     console.log(`Sucedio un error al obtener el personaje ${id}`);
 }
 
-var ids = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+//para poder utilizar el "await" la funcion debe ser async
+async function getCharacters() {
+    var ids = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    var promesas = ids.map(id => getCharacter(id))
+    try {
+        var characters = await Promise.all(promesas)
+        console.log(characters);
+    } catch (id) {
+        onError(id)
+    }
+}
 
-// var promesas = ids.map(function (id){
-//     return getCharacter(id)
-// })
-//Se puede poner como arrow function
-
-var promesas = ids.map(id => getCharacter(id))
-Promise
-    .all(promesas)
-    .then(characters => console.log(characters))
-    .catch(onError)
+getCharacters()
 
 
-
-
+//Forma de encadenar promesas
 // getCharacter(1)
 //     .then(function(character1) {
 //         console.log(`El personaje 1 es ${character1.name}`)
